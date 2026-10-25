@@ -1,3 +1,4 @@
+#include "todo.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -13,16 +14,22 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+  FILE *fptr;
   char *cmd = argv[1];
   char *cmd_arg = argv[2];
+  if (strcmp(cmd_arg, "")) {
+    print_usage(stderr); /* bad command arg → stdout, exit 1 */
+    return 1;
+  }
 
   if (strcmp(cmd, "add")) {
+    create_todo();
   } else if (strcmp(cmd, "list")) {
   } else if (strcmp(cmd, "done")) {
   } else if (strcmp(cmd, "undo")) {
   } else if (strcmp(cmd, "rm")) {
   } else {
-    print_usage(stdout); /* bad command → stdout, exit 0 */
+    print_usage(stderr); /* bad command → stdout, exit 1 */
     return 1;
   }
 
