@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  fclose(fptr);
   return 0;
 }
 
