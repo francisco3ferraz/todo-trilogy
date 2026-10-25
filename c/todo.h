@@ -1,6 +1,10 @@
-#ifndef TODO
-#define TODO
+#ifndef TODO_H
+#define TODO_H
 
-int create_todo();
+typedef struct {
+  int id;
+  char description[100];
+  int done;
+} TODO;
 
 #endif

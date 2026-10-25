@@ -1,5 +1,7 @@
+#include "storage.h"
 #include "todo.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void print_usage(FILE *out);
@@ -14,7 +16,6 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
-  FILE *fptr;
   char *cmd = argv[1];
   char *cmd_arg = argv[2];
   if (strcmp(cmd_arg, "")) {
@@ -22,8 +23,13 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  FILE *fptr;
+  fptr = fopen("filename.txt", "rw");
+
+  TODO *todos;
+  int numTODOS = storage_load(todos);
+
   if (strcmp(cmd, "add")) {
-    create_todo();
   } else if (strcmp(cmd, "list")) {
   } else if (strcmp(cmd, "done")) {
   } else if (strcmp(cmd, "undo")) {
@@ -32,8 +38,10 @@ int main(int argc, char *argv[]) {
     print_usage(stderr); /* bad command → stdout, exit 1 */
     return 1;
   }
+  storage_save(todos, numTODOS);
 
   fclose(fptr);
+  free(todos);
   return 0;
 }
 
